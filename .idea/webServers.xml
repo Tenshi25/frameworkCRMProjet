@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="d21a64f8-1605-4679-8a2d-621e6738f63d" name="git@github.com:Tenshi25/frameworkCRMProjet.git" url="https://github.com/Tenshi25/frameworkCRMProjet.git">
+        <fileTransfer host="https://github.com/Tenshi25/frameworkCRMProjet.git" port="22" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

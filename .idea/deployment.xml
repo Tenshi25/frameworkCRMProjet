@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="git@github.com:Tenshi25/frameworkCRMProjet.git" uploadOnCheckin="d21a64f8-1605-4679-8a2d-621e6738f63d">
+    <serverData>
+      <paths name="git@github.com:Tenshi25/frameworkCRMProjet.git">
+        <serverdata>
+          <mappings>
+            <mapping deploy="https://github.com/Tenshi25/frameworkCRMProjet.git" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myUploadOnCheckinName" value="git@github.com:Tenshi25/frameworkCRMProjet.git" />
+  </component>
+</project>
