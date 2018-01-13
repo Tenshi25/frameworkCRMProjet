@@ -6,45 +6,55 @@
  * Time: 14:14
  */
 
-namespace CRMBundle;
+namespace CRMBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Class Client
+ * @ORM\Entity
+ * @package CRMBundle\Entity*Class Client
+ */
 
 class Client
 {
+    /**
+     * @ORM\Column(name="idClient",type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
     private $idClient;
+    /**
+     * @ORM\Column(type="string",length=255)
+     */
     private $nom ;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $prenom ;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $email ;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $societe ;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $tel ;
+    /**
+     * @ORM\Column(type="string", length=10)
+     */
     private $ville ;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $departement ;
 
     /**
-     * Client constructor.
-     * @param $idClient
-     * @param $nom
-     * @param $prenom
-     * @param $email
-     * @param $societe
-     * @param $tel
-     * @param $ville
-     * @param $departement
-     */
-    public function __construct($idClient, $nom, $prenom, $email, $societe, $tel, $ville, $departement)
-    {
-        $this->idClient = $idClient;
-        $this->nom = $nom;
-        $this->prenom = $prenom;
-        $this->email = $email;
-        $this->societe = $societe;
-        $this->tel = $tel;
-        $this->ville = $ville;
-        $this->departement = $departement;
-    }
-
-    /**
-     * @return mixed
+     * @return integer
      */
     public function getIdClient()
     {
@@ -52,7 +62,7 @@ class Client
     }
 
     /**
-     * @param mixed $idClient
+     * @param integer $idClient
      */
     public function setIdClient($idClient)
     {
@@ -60,7 +70,7 @@ class Client
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getNom()
     {
@@ -68,7 +78,7 @@ class Client
     }
 
     /**
-     * @param mixed $nom
+     * @param string $nom
      */
     public function setNom($nom)
     {
@@ -76,7 +86,7 @@ class Client
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getPrenom()
     {
@@ -84,7 +94,7 @@ class Client
     }
 
     /**
-     * @param mixed $prenom
+     * @param string $prenom
      */
     public function setPrenom($prenom)
     {
@@ -92,7 +102,7 @@ class Client
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getEmail()
     {
@@ -100,7 +110,7 @@ class Client
     }
 
     /**
-     * @param mixed $email
+     * @param string $email
      */
     public function setEmail($email)
     {
@@ -108,7 +118,7 @@ class Client
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getSociete()
     {
@@ -116,7 +126,7 @@ class Client
     }
 
     /**
-     * @param mixed $societe
+     * @param string $societe
      */
     public function setSociete($societe)
     {
@@ -124,7 +134,7 @@ class Client
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getTel()
     {
@@ -132,7 +142,7 @@ class Client
     }
 
     /**
-     * @param mixed $tel
+     * @param string $tel
      */
     public function setTel($tel)
     {
@@ -140,7 +150,7 @@ class Client
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getVille()
     {
@@ -148,7 +158,7 @@ class Client
     }
 
     /**
-     * @param mixed $ville
+     * @param string $ville
      */
     public function setVille($ville)
     {
@@ -156,7 +166,7 @@ class Client
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getDepartement()
     {
@@ -164,11 +174,13 @@ class Client
     }
 
     /**
-     * @param mixed $departement
+     * @param string $departement
      */
     public function setDepartement($departement)
     {
         $this->departement = $departement;
     }
+
+
 
 }

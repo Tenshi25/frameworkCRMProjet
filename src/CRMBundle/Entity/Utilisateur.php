@@ -5,11 +5,31 @@
  * Date: 05/01/2018
  * Time: 14:12
  */
-namespace CRMBundle;
+namespace CRMBundle\Entity;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Class Client
+ * @ORM\Entity
+ * @package CRMBundle\Entity*Class Client
+ */
+
 class Utilisateur
 {
+
+    /**
+     * @ORM\Column(name="id",type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
 private $id ;
+/**
+ * @ORM\Column(type="string",length=255)
+ */
 private $login ;
+    /**
+     * @ORM\Column(type="string",length=255)
+     */
 private $mdp ;
 
     /**

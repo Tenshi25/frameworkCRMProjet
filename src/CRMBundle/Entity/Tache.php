@@ -6,7 +6,7 @@
  * Time: 14:14
  */
 
-namespace CRMBundle;
+namespace CRMBundle\Entity;
 
 
 class Tache

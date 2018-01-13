@@ -6,13 +6,29 @@
  * Time: 14:41
  */
 
-namespace CRMBundle;
+namespace CRMBundle\Entity;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Class Note
+ * @ORM\Entity
+ * @package CRMBundle\Entity*Class Note
+ */
 
 
 class Note
 {
+    /**
+     * @ORM\Column(name="id",type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
 private $id ;
+    /**
+     * @ORM\Column(type="text",length=5000)
+     */
 private $textenote ;
+
 
     /**
      * Note constructor.
@@ -26,7 +42,7 @@ private $textenote ;
     }
 
     /**
-     * @return mixed
+     * @return integer
      */
     public function getId()
     {
@@ -34,7 +50,7 @@ private $textenote ;
     }
 
     /**
-     * @param mixed $id
+     * @param integer $id
      */
     public function setId($id)
     {
@@ -42,7 +58,7 @@ private $textenote ;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getTextenote()
     {
@@ -50,7 +66,7 @@ private $textenote ;
     }
 
     /**
-     * @param mixed $textenote
+     * @param string $textenote
      */
     public function setTextenote($textenote)
     {

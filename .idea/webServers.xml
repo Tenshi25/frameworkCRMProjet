@@ -10,6 +10,14 @@
           <option name="port" value="22" />
         </fileTransfer>
       </webServer>
+      <webServer id="1f4791d4-9479-476b-bc3f-e7f4d6aa3690" name="VM" url="http://192.168.56.102">
+        <fileTransfer host="192.168.56.102" port="22" rootFolder="/home/remi" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
     </option>
   </component>
 </project>

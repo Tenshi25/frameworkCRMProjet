@@ -2,6 +2,20 @@
 <project version="4">
   <component name="PublishConfigData" serverName="git@github.com:Tenshi25/frameworkCRMProjet.git" uploadOnCheckin="d21a64f8-1605-4679-8a2d-621e6738f63d">
     <serverData>
+      <paths name="Squeleton symfony">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="VM">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="git@github.com:Tenshi25/frameworkCRMProjet.git">
         <serverdata>
           <mappings>
