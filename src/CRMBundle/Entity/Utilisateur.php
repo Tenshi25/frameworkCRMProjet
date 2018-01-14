@@ -38,7 +38,10 @@ private $mdp ;
      * @param $login
      * @param $mdp
      */
-    public function __construct($id, $login, $mdp)
+    public function __construct()
+    {
+    }
+    public function __construct1($id, $login, $mdp)
     {
         $this->id = $id;
         $this->login = $login;

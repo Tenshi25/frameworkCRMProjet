@@ -104,14 +104,9 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
         }
 
-        // premierCo
-        if ('/index' === $pathinfo) {
-            return array (  '_controller' => 'CRMBundle\\Controller\\ConnexionController::indexAction',  '_route' => 'premierCo',);
-        }
-
-        // inscription
-        if ('/inscription' === $pathinfo) {
-            return array (  '_controller' => 'CRMBundle\\Controller\\InscriptionController::indexAction',  '_route' => 'inscription',);
+        // home
+        if ('/home' === $pathinfo) {
+            return array (  '_controller' => 'CRMBundle\\Controller\\ConnexionController::indexAction',  '_route' => 'home',);
         }
 
         // Connexion
@@ -119,14 +114,14 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
             return array (  '_controller' => 'CRMBundle\\Controller\\ConnexionController::connexionAction',  '_route' => 'Connexion',);
         }
 
-        // homepage
-        if ('' === $trimmedPathinfo) {
-            $ret = array (  '_controller' => 'AppBundle\\Controller\\DefaultController::indexAction',  '_route' => 'homepage',);
-            if (substr($pathinfo, -1) !== '/') {
-                return array_replace($ret, $this->redirect($rawPathinfo.'/', 'homepage'));
-            }
+        // inscription
+        if ('/inscription' === $pathinfo) {
+            return array (  '_controller' => 'CRMBundle\\Controller\\InscriptionController::IndexAction',  '_route' => 'inscription',);
+        }
 
-            return $ret;
+        // insertUtilisateur
+        if ('/insertUtilisateur' === $pathinfo) {
+            return array (  '_controller' => 'CRMBundle\\Controller\\InscriptionController::AddAction',  '_route' => 'insertUtilisateur',);
         }
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();
