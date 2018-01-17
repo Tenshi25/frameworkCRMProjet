@@ -1,3 +1,0 @@
-CRM:
-resource: "@CRMBundle/Controller/"
-    type:     annotation

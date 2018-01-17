@@ -14,7 +14,7 @@ use CRMBundle\Entity\Utilisateur;
 use CRMBundle\Form\UtilisateurType;
 use Symfony\Component\HttpFoundation\Response;
 
-class connexionController extends Controller
+class ConnexionController extends Controller
 {
 
 
@@ -25,7 +25,6 @@ class connexionController extends Controller
     {
         if (empty($_SESSION["utilisateur"])){
             $utilisateur = new utilisateur();
-
             // on récupere le formulaire
             $form = $this->createForm(UtilisateurType::class, $utilisateur);
             // on génére le html du form
