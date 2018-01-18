@@ -5,17 +5,77 @@
     <title>homepage</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/myStyle.css" type="text/css"/>
+
 </head>
 <body>
-<div class="container">
-    <div class="jumbotron col-sm-12">
-        <div class="col-lg-12"><h1> Bonjour {{ utilisateur.login }} </h1></div>
-        <div class="alert alert-success" role="alert"> Vous vous êtes connecté avec succés</div>
-        <a href="http://192.168.56.102:8080/deconnexion"><button type="submit" class="btn btn-primary btn-lg btn-block">déconnexion ! </button></a>
+<div class="container" style="max-width:1600px;">
+    <div class="row">
+        <div class=" col-sm-12">
+            <nav class="navbar navbar-inverse bg-primary">
+                <p style="color:white;">Bienvenu dans le CRM</p>
+                <a href="http://192.168.56.102:8080/deconnexion"><button type="submit" style="border-width: inherit;border-color: white;" class="btn btn-primary btn-lg" >déconnexion ! </button></a>
+            </nav>
+        </div>
     </div>
+    <div class="row">
+            <div class="col-sm-7" >
+                <div class="col-lg-12"><h1> Bonjour {{ utilisateur.login }} </h1></div>
+                <div class="alert alert-success" role="alert"> Vous vous êtes connecté avec succés</div>
+                <p> Voici vos tâche à faire</p>
+                <div id="contenuCentral"></div>
+            </div>
+            <div class="col-sm-5">
+                <div class="col-lg-12"><h1> carnet d'adresse </h1></div>
+                {% if(listeClients is not empty) %}
+                    <table class="table table-condensed">
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prenom</th>
+                            <th>Société</th>
+                        </tr>
+                    {% for client in listeClients %}
+                        <div  id="div_Client{{ client.idClient }}" class="col-sm-12">
+                                <tr data-id="{{ client.idClient }}">
+                                    <td >{{ client.nom }}</td>
+                                    <td >{{ client.prenom }}</td>
+                                    <td >{{ client.societe }}</td>
+                                </tr>
+                        </div>
+                    {% endfor %}
+
+                    </table>
+                {% else %}
+                    <p class="alert alert-info"> Aucun client trouvé.</p>
+                {% endif %}
+            </div>
+    </div>
+
 </div>
+
 </body>
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+<script type="text/javascript"> $(function () {
+        $("tr").on("click", function(e) {
+                // id de l'element
+                var idClient = this.getAttribute('data-id');
+                console.log(idClient);
+                    $.ajax({
+                        method:"POST",
+                        url: '/afficheClient',
+                        data: {
+                            idClient : idClient
+                        },
+                        success: function(data)
+                        {
+                            var div=document.getElementById('contenuCentral').innerHTML = data;
+                            console.log(div);
+                        }
+                    });
+            });
+})
+</script>
 </html>

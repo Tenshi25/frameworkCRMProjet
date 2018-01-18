@@ -7,29 +7,52 @@
  */
 
 namespace CRMBundle\Entity;
+use Doctrine\ORM\Mapping as ORM;
 
 
+/**
+ * Class Tache
+ * @ORM\Entity
+ * @package CRMBundle\Entity*Class Note
+ */
 class Tache
 {
+    /**
+     * @ORM\Column(name="id",type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
     private $idTache;
+    /**
+     * @ORM\Column(type="text",length=1000)
+     */
     private $textTache;
+    /**
+     * @ORM\Column(type="date")
+     */
     private $date;
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $fait;
 
     /**
      * Tache constructor.
      * @param $idTache
      * @param $textTache
      * @param $date
+     * @param $fait
      */
-    public function __construct($idTache, $textTache, $date)
+    public function __construct($idTache, $textTache, $date, $fait)
     {
         $this->idTache = $idTache;
         $this->textTache = $textTache;
         $this->date = $date;
+        $this->fait = $fait;
     }
 
     /**
-     * @return mixed
+     * @return integer
      */
     public function getIdTache()
     {
@@ -37,7 +60,7 @@ class Tache
     }
 
     /**
-     * @param mixed $idTache
+     * @param integer $idTache
      */
     public function setIdTache($idTache)
     {
@@ -45,7 +68,7 @@ class Tache
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getTextTache()
     {
@@ -53,7 +76,7 @@ class Tache
     }
 
     /**
-     * @param mixed $textTache
+     * @param string $textTache
      */
     public function setTextTache($textTache)
     {
@@ -74,6 +97,22 @@ class Tache
     public function setDate($date)
     {
         $this->date = $date;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getFait()
+    {
+        return $this->fait;
+    }
+
+    /**
+     * @param boolean $Fait
+     */
+    public function setFait($Fait)
+    {
+        $this->fait = $Fait;
     }
 
 

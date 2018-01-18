@@ -41,11 +41,11 @@ class Client
      */
     private $societe ;
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=10)
      */
     private $tel ;
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="string", length=255)
      */
     private $ville ;
     /**

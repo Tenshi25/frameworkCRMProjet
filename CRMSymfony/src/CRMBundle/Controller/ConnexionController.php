@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use CRMBundle\Entity\Utilisateur;
 use CRMBundle\Form\UtilisateurType;
+use CRMBundle\Entity\Client;
 use Symfony\Component\HttpFoundation\Response;
 
 class ConnexionController extends Controller
@@ -35,23 +36,25 @@ class ConnexionController extends Controller
 
             //si le formulaire a été soumis
             if ($form->isSubmitted()) {
-                //findOneBy(array("login",$form->get("login"))
-
-                // recupére un objet grâce a son id
-                //$utilisateur= $this->getDoctrine()->getRepository('CRMBundle:Utilisateur')->find($id);
 
                 $utilisateur = $this->getDoctrine()->getRepository('CRMBundle:Utilisateur')->findOneBylogin($form->get("login")->getData());
                 if(!empty($utilisateur)) {
                     if ($utilisateur->getLogin() == $form->get("login")->getData() && $utilisateur->getMdp() == $form->get("mdp")->getData()) {
                         //session_start();
                         $_SESSION["utilisateur"] = $utilisateur;
-                        var_dump("utilisateur connecter : ", $_SESSION["utilisateur"]);
+                        //var_dump("utilisateur connecter : ", $_SESSION["utilisateur"]);
 
-                        return $this->render('home.html.twig', array('utilisateur' => $_SESSION["utilisateur"]));
+                        $repository = $this->getDoctrine()->getRepository(client::class);
+                        $listeClients = $repository->findAll();
+                        return $this->render('home.html.twig', array('utilisateur' => $_SESSION["utilisateur"],'listeClients' =>$listeClients));
                     }
-                    var_dump($utilisateur);
+                    //var_dump($utilisateur);
                     //on enregitre l'utilisateur dans la bdd
-                    $em = $this->getDoctrine()->getManager();
+                    //$em = $this->getDoctrine()->getManager();
+                    //findOneBy(array("login",$form->get("login"))
+                    // recupére un objet grâce a son id
+                    //$utilisateur= $this->getDoctrine()->getRepository('CRMBundle:Utilisateur')->find($id);
+
                 }
                 $formView = $form->createView();
                 return $this->render('formErreurConnexion.html.twig', array('form' => $formView));
@@ -59,7 +62,9 @@ class ConnexionController extends Controller
             $formView = $form->createView();
             return $this->render('formBaseConnexion.html.twig', array('form' => $formView));
         }else{
-            return $this->render('home.html.twig', array('utilisateur' => $_SESSION["utilisateur"]));
+            $repository = $this->getDoctrine()->getRepository(client::class);
+            $listeClients = $repository->findAll();
+            return $this->render('home.html.twig', array('utilisateur' => $_SESSION["utilisateur"],'listeClients' =>$listeClients));
         }
 
     }
