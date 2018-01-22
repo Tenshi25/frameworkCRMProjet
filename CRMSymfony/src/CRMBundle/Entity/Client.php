@@ -9,6 +9,8 @@
 namespace CRMBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Class Client
@@ -52,6 +54,17 @@ class Client
      * @ORM\Column(type="string", length=255)
      */
     private $departement ;
+    /**
+     * @ORM\OneToMany(targetEntity="CRMBundle\Entity\Client", mappedBy="client")
+     */
+    private $taches;
+    /**
+     * Client constructor.
+     */
+    public function __construct()
+    {
+        $this->taches = new ArrayCollection();
+    }
 
     /**
      * @return integer

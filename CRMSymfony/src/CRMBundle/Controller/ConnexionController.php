@@ -7,6 +7,7 @@
  */
 
 namespace CRMBundle\Controller;
+use CRMBundle\Entity\Tache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,11 +44,32 @@ class ConnexionController extends Controller
                         //session_start();
                         $_SESSION["utilisateur"] = $utilisateur;
                         //var_dump("utilisateur connecter : ", $_SESSION["utilisateur"]);
-
-                        $repository = $this->getDoctrine()->getRepository(client::class);
+                        $em = $this->getDoctrine()->getManager();
+                        $repository = $em->getRepository(client::class);
+                        //$repository = $this->getDoctrine()->getRepository(client::class);
                         $listeClients = $repository->findAll();
-                        return $this->render('home.html.twig', array('utilisateur' => $_SESSION["utilisateur"],'listeClients' =>$listeClients));
+                        $clients= $this->get('knp_paginator')->paginate(
+                        $listeClients,
+                        $request->query->get('page', 1),/*le numéro de la page à afficher*/
+                        10/*nbre d'éléments par page*/
+                        );
+                        $repository = $em->getRepository(tache::class);
+                        $listeTaches=$repository->findAll();
+                        return $this->render('home.html.twig', array('utilisateur' => $_SESSION["utilisateur"], 'listeClients' => $clients,'listeTaches'=>$listeTaches));
                     }
+                    /*
+                                       $em = $this->getDoctrine()->getManager();
+
+                                       $listeReservations = $em->getRepository('RestoBundle:Reservation')->findAll();
+                                       $reservations  = $this->get('knp_paginator')->paginate(
+                                           $listeReservations,
+                                           $request->query->get('page', 1)/*le numéro de la page à afficher*/
+                    //6/*nbre d'éléments par page
+                    /*
+                    );
+                    return $this->render('reservation/index.html.twig', array(
+                        'reservations' => $reservations,));*/
+
                     //var_dump($utilisateur);
                     //on enregitre l'utilisateur dans la bdd
                     //$em = $this->getDoctrine()->getManager();
@@ -62,9 +84,22 @@ class ConnexionController extends Controller
             $formView = $form->createView();
             return $this->render('formBaseConnexion.html.twig', array('form' => $formView));
         }else{
-            $repository = $this->getDoctrine()->getRepository(client::class);
+            /*$repository = $this->getDoctrine()->getRepository(client::class);
             $listeClients = $repository->findAll();
-            return $this->render('home.html.twig', array('utilisateur' => $_SESSION["utilisateur"],'listeClients' =>$listeClients));
+            return $this->render('home.html.twig', array('utilisateur' => $_SESSION["utilisateur"],'listeClients' =>$listeClients));*/
+            $em = $this->getDoctrine()->getManager();
+            $repository = $em->getRepository(client::class);
+            //$repository = $this->getDoctrine()->getRepository(client::class);
+            $listeClients = $repository->findAll();
+            $clients= $this->get('knp_paginator')->paginate(
+                $listeClients,
+                $request->query->get('page', 1),/*le numéro de la page à afficher*/
+                10/*nbre d'éléments par page*/
+            );
+            $repository = $em->getRepository(tache::class);
+            $listeTaches=$repository->findAll();
+            return $this->render('home.html.twig', array('utilisateur' => $_SESSION["utilisateur"],'listeTaches'=>$listeTaches, 'listeClients' => $clients));
+            //return $this->render('home.html.twig', array('utilisateur' => $_SESSION["utilisateur"], 'listeClients' => $clients));
         }
 
     }

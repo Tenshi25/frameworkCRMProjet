@@ -35,6 +35,11 @@ class Tache
      * @ORM\Column(type="boolean")
      */
     private $fait;
+    /**
+     * @ORM\ManyToOne(targetEntity="Client", inversedBy="taches")
+     * @ORM\JoinColumn(name="client_id", referencedColumnName="idClient")
+     */
+    private $client;
 
     /**
      * Tache constructor.
@@ -43,7 +48,11 @@ class Tache
      * @param $date
      * @param $fait
      */
-    public function __construct($idTache, $textTache, $date, $fait)
+    public function __construct()
+    {
+
+    }
+    public function __construct1($idTache, $textTache, $date, $fait)
     {
         $this->idTache = $idTache;
         $this->textTache = $textTache;
@@ -113,6 +122,22 @@ class Tache
     public function setFait($Fait)
     {
         $this->fait = $Fait;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    /**
+     * @param mixed $client
+     */
+    public function setClient($client)
+    {
+        $this->client = $client;
     }
 
 

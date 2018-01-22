@@ -1,14 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8" />
-    <title>homepage</title>
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/myStyle.css" type="text/css"/>
+{% extends '/base.html.twig' %}
 
-</head>
-<body>
+    {% block title %}Homepage{% endblock %}
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('bundles/crm/css/myStyle.css') }}" type="text/css"/>
+        <link rel="stylesheet" href="{{ asset('bundles/CRMBundles/css/pagination.css') }}" type="text/css"/>
+    {% endblock %}
+{% block body %}
 <div class="container" style="max-width:1600px;">
     <div class="row">
         <div class=" col-sm-12">
@@ -19,13 +16,45 @@
         </div>
     </div>
     <div class="row">
-            <div class="col-sm-7" >
+            <div class="col-sm-4" >
                 <div class="col-lg-12"><h1> Bonjour {{ utilisateur.login }} </h1></div>
                 <div class="alert alert-success" role="alert"> Vous vous êtes connecté avec succés</div>
-                <p> Voici vos tâche à faire</p>
-                <div id="contenuCentral"></div>
+                <p> Voici les tâche à faire</p>
+                {% if(listeTaches is not empty) %}
+                    <table class="table table-condensed">
+                        <tr>
+                            <th>Texte</th>
+                            <th>Date</th>
+                            <th>statut</th>
+                            <th>id Client</th>
+                        </tr>
+                        {% for tache in listeTaches %}
+                            <div  id="div_Client{{ tache.idTache }}" class="col-sm-12">
+                                <tr data-id="{{ tache.idTache }}">
+                                    <td >{{ tache.textTache }}</td>
+                                    <td >{{ tache.date|date("m/d/Y") }}</td>
+                                    {% if(tache.fait == true) %}
+
+                                        <td > <a href="/changerSatutTache/{{ tache.idTache }}"><button style ="width: 30px; height: 30px; background: green; -moz-border-radius: 20px; -webkit-border-radius: 20px; border-radius: 50px;" aria-hidden="false"></button></a></td>
+                                    {% else %}
+                                        <td > <a href="/changerSatutTache/{{ tache.idTache }}"><button style ="width: 30px; height: 30px; background: red; -moz-border-radius: 20px; -webkit-border-radius: 20px; border-radius: 50px;" aria-hidden="false"></button></a></td>
+                                    {% endif %}
+                                    <td >{{ tache.client.idClient }}</td>
+                                </tr>
+                            </div>
+                        {% endfor %}
+
+                    </table>
+
+                {% else %}
+                    <p class="alert alert-info"> Aucune Tâche trouvé.</p>
+                {% endif %}
+
             </div>
-            <div class="col-sm-5">
+        <div class="col-sm-4" >
+            <div id="contenuCentral"></div>
+        </div >
+            <div class="col-sm-4">
                 <div class="col-lg-12"><h1> carnet d'adresse </h1></div>
                 {% if(listeClients is not empty) %}
                     <table class="table table-condensed">
@@ -45,6 +74,7 @@
                     {% endfor %}
 
                     </table>
+                    <div class="text-center">{{ knp_pagination_render(listeClients) }}</div>
                 {% else %}
                     <p class="alert alert-info"> Aucun client trouvé.</p>
                 {% endif %}
@@ -52,30 +82,8 @@
     </div>
 
 </div>
-
-</body>
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
-<script type="text/javascript"> $(function () {
-        $("tr").on("click", function(e) {
-                // id de l'element
-                var idClient = this.getAttribute('data-id');
-                console.log(idClient);
-                    $.ajax({
-                        method:"POST",
-                        url: '/afficheClient',
-                        data: {
-                            idClient : idClient
-                        },
-                        success: function(data)
-                        {
-                            var div=document.getElementById('contenuCentral').innerHTML = data;
-                            console.log(div);
-                        }
-                    });
-            });
-})
+{% endblock %}
+{% block javascripts %}
+<script type="text/javascript" src="{{ asset('web/bundles/CRMBundle/js/Client.js') }}">
 </script>
-</html>
+{% endblock %}
